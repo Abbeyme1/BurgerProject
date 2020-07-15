@@ -1,33 +1,11 @@
-import React, { Component } from "react";
-import IngredientController from "./IngredientController/IngredientController";
+import React from "react";
+import BuildControl from "./BuildControl/BuildControl";
 
-class BuildControl extends Component {
-  render() {
-    return (
-      <div>
-        <IngredientController
-          ingredient="salad"
-          inc={this.props.inc}
-          dec={this.props.dec}
-        />
-        <IngredientController
-          ingredient="meat"
-          inc={this.props.inc}
-          dec={this.props.dec}
-        />
-        <IngredientController
-          ingredient="cheese"
-          inc={this.props.inc}
-          dec={this.props.dec}
-        />
-        <IngredientController
-          ingredient="bacon"
-          inc={this.props.inc}
-          dec={this.props.dec}
-        />
-      </div>
-    );
-  }
-}
+const buildControls = (props) => {
+  let btns = Object.keys(props.ingredients).map((i) => {
+    return <BuildControl ingredient={i} inc={props.inc} dec={props.dec} />;
+  });
+  return <div>{btns}</div>;
+};
 
-export default BuildControl;
+export default buildControls;

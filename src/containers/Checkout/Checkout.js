@@ -6,7 +6,7 @@ import { Route } from "react-router-dom";
 class Checkout extends Component {
   state = {
     ingredients: null,
-    tatalPrice: 0,
+    price: 0,
   };
 
   componentWillMount() {
@@ -14,15 +14,15 @@ class Checkout extends Component {
     const query = new URLSearchParams(this.props.location.search);
     const ingredients = {};
     let price = 0;
-    for (let params of query.entries()) {
-      if (params[0] === "price") {
-        price = params[1];
+    for (let param of query.entries()) {
+      if (param[0] === "price") {
+        price = param[1];
       } else {
-        ingredients[params[0]] = +params[1];
+        ingredients[param[0]] = +param[1];
       }
     }
 
-    this.setState({ ingredients: ingredients, totalPrice: price });
+    this.setState({ ingredients: ingredients, price: price });
   }
 
   checkoutCancelledHandler = () => {
@@ -46,7 +46,7 @@ class Checkout extends Component {
           component={(props) => (
             <ContactData
               ingredients={this.state.ingredients}
-              price={this.state.tatalPrice}
+              price={this.state.price}
               {...props}
             />
           )}

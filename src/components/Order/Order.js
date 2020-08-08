@@ -1,8 +1,10 @@
 import React from "react";
+
 import classes from "./Order.module.css";
 
-const Order = (props) => {
+const order = (props) => {
   const ingredients = [];
+
   for (let ingredientName in props.ingredients) {
     ingredients.push({
       name: ingredientName,
@@ -13,7 +15,6 @@ const Order = (props) => {
   const ingredientOutput = ingredients.map((ig) => {
     return (
       <span
-        key={ig.name}
         style={{
           textTransform: "capitalize",
           display: "inline-block",
@@ -21,19 +22,21 @@ const Order = (props) => {
           border: "1px solid #ccc",
           padding: "5px",
         }}
+        key={ig.name}
       >
         {ig.name} ({ig.amount})
       </span>
     );
   });
+
   return (
     <div className={classes.Order}>
-      <p>ingredients: {ingredientOutput}</p>
+      <p>Ingredients: {ingredientOutput}</p>
       <p>
-        PRICE <strong>USD {props.price}</strong>
+        Price: <strong>USD {Number.parseFloat(props.price).toFixed(2)}</strong>
       </p>
     </div>
   );
 };
 
-export default Order;
+export default order;

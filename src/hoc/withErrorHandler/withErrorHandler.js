@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Aux from "../Auxillary/Auxillary";
+
 import Modal from "../../components/UI/Modal/Modal";
+import Aux from "../Auxillary/Auxillary";
 
 const withErrorHandler = (WrappedComponent, axios) => {
   return class extends Component {
@@ -13,17 +14,15 @@ const withErrorHandler = (WrappedComponent, axios) => {
         this.setState({ error: null });
         return req;
       });
-
       this.resInterceptor = axios.interceptors.response.use(
         (res) => res,
-        (err) => {
-          this.setState({ error: err });
+        (error) => {
+          this.setState({ error: error });
         }
       );
     }
 
     componentWillUnmount() {
-      // console.log("unkmount " + this.reqInterceptor + this.resInterceptor);
       axios.interceptors.request.eject(this.reqInterceptor);
       axios.interceptors.response.eject(this.resInterceptor);
     }
@@ -41,7 +40,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
           >
             {this.state.error ? this.state.error.message : null}
           </Modal>
-          <WrappedComponent />
+          <WrappedComponent {...this.props} />
         </Aux>
       );
     }

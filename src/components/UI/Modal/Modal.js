@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+
 import classes from "./Modal.module.css";
-import Backdrop from "../Backdrop/Backdrop";
 import Aux from "../../../hoc/Auxillary/Auxillary";
+import Backdrop from "../Backdrop/Backdrop";
 
 class Modal extends Component {
   shouldComponentUpdate(nextProps, nextState) {
@@ -11,9 +12,10 @@ class Modal extends Component {
     );
   }
 
-  componentDidUpdate() {
-    console.log("[modal.js] componentwillmount");
+  componentWillUpdate() {
+    console.log("[Modal] WillUpdate");
   }
+
   render() {
     return (
       <Aux>
@@ -33,5 +35,3 @@ class Modal extends Component {
 }
 
 export default Modal;
-
-//that box that we see when we click order now btn
